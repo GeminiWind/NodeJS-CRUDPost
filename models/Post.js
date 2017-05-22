@@ -18,31 +18,7 @@ var postSchema = new Schema({
     updated_at: Date
 });
 var Post = mongoose.model('Post', postSchema);
-//Helper method for CRUD
-postSchema.methods.all = (cb) => {
-    return this.model('Post').find({}, cb);
-};
-postSchema.methods.find = (id, cb) => {
-    return this.model('Post').findById(id, cb);
-};
-postSchema.methods.store = (req, cb) => {
-    let post = new Post({
-        title: req.body.title,
-        content: req.body.content
-    });
-    return post.save(cb);
-};
-postSchema.methods.update = (id, req, cb) => {
-    this.model('Post').findByIdAndUpdate(id, {
-        $set: {
-            title: req.body.title,
-            content: req.body.content
-        }
-    }, cb);
-};
-postSchema.methods.delete = (id, cb) => {
-    return this.model('Post').findByIdAndRemove(id, cb);
-};
+
 // on every save, add the date
 postSchema.pre('save', function(next) {
     // get the current date
