@@ -1,13 +1,11 @@
-//Model
-const path = require("path");
-const Post = require(path.normalize('./../models/Post'));
+const Post = require('./../models/Post');
+var mongoose = require("mongoose");
 
 exports.index = (req,res) => {
 	Post.find(function (err, posts) {  
 	    if (err) {
 	        res.status(500).send(err)
 	    } else {
-	        console.log(posts);
 	        res.render("posts/index",{posts: posts});
 	    }
 	});
@@ -18,18 +16,27 @@ exports.create = (req,res) => {
 }
 
 exports.store = (req,res) => {
-	let post = new Post(req.body);
-	post.save(function (err, createdPost) {  
-    if (err) {
-        res.send(err);
+	req.assert('title','Null title').notEmpty();
+	req.assert('content','Null content').notEmpty();
+	req.getValidationResult().then(function(result) {
+    if (!result.isEmpty()) {
+      res.status(400).send('There have been validation errors: ');
+      return;
     }
-    res.redirect("/posts");
-});
+   	let post = new Post(req.body);
+	post.save(function (err, createdPost) {  
+	    if (err) {
+	         req.flash('error', 'Whoops! Sonething went wrong');
+	    }
+	    req.flash('success','Create post sucessful');
+	    res.redirect("/posts");
+		});
+  	});
 }
 
 exports.edit = (req,res) => {
 	Post.findById(req.params.id, (err,post)=>{
-		 if (err) {
+		if (err) {
 	        res.send(err);
 	    }
 	    if (post) {
@@ -41,16 +48,22 @@ exports.edit = (req,res) => {
 }
 
 exports.update = (req,res) => {
-	Post.findByIdAndUpdate(req.params.id, {$set: req.body}, (err,post)=>{
+	let _id = new mongoose.Schema.ObjectId(req.params.id).path;
+	Post.findByIdAndUpdate(_id, req.body, (err,post)=>{
 		if (err) {
-			console.log(err);
+			req.flash('error', 'Whoops! Sonething went wrong');
 		} 
-		return res.redirect("posts");
+		req.flash('success','Update post sucessful');
+		res.redirect("/posts");
 	});
 }
 
 exports.delete = (req,res) => {
-	Post.findByIdAndRemove(req.params.id, (err,post)=>{
-		return res.redirect("posts");
+	let _id = new mongoose.Schema.ObjectId(req.params.id).path;
+	Post.findByIdAndRemove(_id, (err,post)=>{
+		if (err) {
+	        res.json({error: 1, message:"Error"});
+	    }
+	    res.json({error: 0, message:"Success"});
 	})
 }
