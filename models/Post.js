@@ -1,5 +1,7 @@
 const dotenv = require("dotenv").config();
 var mongoose = require("mongoose");
+
+mongoose.Promise = require('bluebird');
 // Connect to the beerlocker MongoDB
 mongoose.connect(process.env.MONGODB_URL);
 var Schema = mongoose.Schema;

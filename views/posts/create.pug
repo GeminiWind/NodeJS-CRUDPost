@@ -1,4 +1,25 @@
-html
-	head
-	body
-		p Create
+extends ./../layout/desktop.pug
+
+block content
+     section#main-content
+        section.wrapper.site-min-height
+          h3
+            i.fa.fa-angle-right
+            |  Create New Post
+          .row.mt
+            .col-lg-12
+              .form-panel
+                h4.mb
+                  i.fa.fa-angle-right
+                  |  Form Elements
+                form.form-horizontal.style-form(method='post', action="/posts")
+                  .form-group
+                    label.col-sm-2.col-sm-2.control-label Title
+                    .col-sm-10
+                      input.form-control(type='text', name='title')
+                      span.help-block Title for this posts.Note that title must be unique.
+                  .form-group
+                    label.col-sm-2.col-sm-2.control-label Content
+                    .col-sm-10
+                      textarea.form-control(name='content', rows="10",cols="10")
+                  button.btn.btn-primary(type='submit') Submit

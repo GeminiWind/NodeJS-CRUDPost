@@ -1,5 +1,91 @@
-ul
-  for post in posts
-    li= post.title
-  else
-    li sorry, no posts!
+extends ./../layout/desktop.pug
+
+block content
+     section#main-content
+        section.wrapper.site-min-height
+          h3
+            i.fa.fa-angle-right
+            |  Post Management
+          .row.mt
+            .col-md-12
+              .content-panel
+                - if (messages.success)
+                  script.
+                    swal(
+                      'Success',
+                      'Your action was success',
+                      'success'
+                    )
+                - else if (messages.error)
+                  script.
+                    swal({
+                      title: 'Whoops ...',
+                      text: "Look like something went wrong",
+                      type: 'error',
+                    })
+                table.table.table-striped.table-advance.table-hover
+                  h4
+                    i.fa.fa-angle-right
+                    |  Post List
+                  hr
+                  thead
+                    tr
+                      th
+                        i.fa.fa-bullhorn
+                        |  Title
+                      th
+                  tbody
+                      each post in posts
+                        tr
+                          td
+                            a(href='basic_table.html#') #{post.title}
+                          td
+                            button.btn.btn-primary.btn-xs
+                              a(href="/posts/" + post._id + "/edit")
+                                i.fa.fa-pencil
+                            button.btn.btn-danger.btn-xs.deletePost(data-post-id=post._id, data-post-title=post.title)
+                              i.fa.fa-trash-o
+                        tr
+block additonalScript
+  script.
+    $('.deletePost').each(function () {
+      var $this = $(this);
+      $this.on("click", function () {
+        swal({
+          title: 'Enter post title',
+          input: 'text',
+          showCancelButton: true,
+          confirmButtonText: 'Delete',
+          showLoaderOnConfirm: true,
+          preConfirm: function (title) {
+            return new Promise(function (resolve, reject) {
+              setTimeout(function() {
+                if (title != $this.data('post-title')) {
+                  reject('Your title is not match.')
+                } else {
+                  resolve()
+                }
+              }, 2000)
+            })
+          },
+          allowOutsideClick: false
+        }).then(function (title) {
+          $.ajax({
+            url: "/posts/" + $this.data('post-id') + "",
+            type: "DELETE",
+            success : function () {
+                $this.parent().parent().remove();
+                swal("Done!", "It was succesfully deleted!", "success");
+            },
+            error : function (){
+              swal({
+                title:"error",
+                text:"error",
+                type: "error"
+              })
+            }
+          });
+        })
+      });
+    });
+    
