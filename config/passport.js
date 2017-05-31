@@ -5,9 +5,11 @@ var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 var configAuth = require('./auth');
 
+require("dotenv").config();
+
 
 // load up the user model
-var User       = require('../models/User');
+var User       = require('../app/models/User');
 
 
 module.exports = function(passport) {
@@ -142,9 +144,9 @@ module.exports = function(passport) {
     passport.use(new FacebookStrategy({
 
         // pull in our app id and secret from our auth.js file
-        clientID        : configAuth.facebook.clientID,
-        clientSecret    : configAuth.facebook.clientSecret,
-        callbackURL     : configAuth.facebook.callbackURL,
+        clientID        : process.env.FACEBOOK_CLIENT_ID || configAuth.facebook.clientID,
+        clientSecret    : process.env.FACEBOOK_CLIENT_SECRET || configAuth.facebook.clientSecret,
+        callbackURL     : process.env.FACEBOOK_CALLBACK_URL || configAuth.facebook.callbackURL,
         profileFields: ['id', 'email', 'gender', 'link', 'locale', 'name', 'timezone', 'updated_time', 'verified'],
 
     },
@@ -193,9 +195,9 @@ module.exports = function(passport) {
 
     passport.use(new GoogleStrategy({
 
-        clientID        : configAuth.google.clientID,
-        clientSecret    : configAuth.google.clientSecret,
-        callbackURL     : configAuth.google.callbackURL,
+        clientID        : process.env.GOOGLE_CLIENT_ID || configAuth.google.clientID,
+        clientSecret    : process.env.GOOGLE_CLIENT_SECRET || configAuth.google.clientSecret,
+        callbackURL     : process.env.GOOGLE_CALLBACK_URL || configAuth.google.callbackURL,
 
     },
     function(token, refreshToken, profile, done) {

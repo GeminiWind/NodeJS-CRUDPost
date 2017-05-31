@@ -53,7 +53,7 @@ app.use(function(req, res, next) {
 });
 
 //router
-require('./routes/web.js')(app,passport);
+require('./app/routes/web.js')(app,passport);
 
 
 app.listen(app.get('port'), app.get('domain'), () => {
