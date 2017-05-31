@@ -1,13 +1,21 @@
-const express = require("express");
-const chalk = require("chalk");
-const app = express();
-const dotenv = require("dotenv").config();
-const bodyParser = require("body-parser");
-const expressValidator =  require("express-validator");
-const methodOverride = require('method-override');
-const session = require('express-session');
-const MongoStore = require('connect-mongo')(session);
-const flash = require('express-flash');
+var express = require("express");
+var chalk = require("chalk");
+var app = express();
+var dotenv = require("dotenv").config();
+var cookieParser = require('cookie-parser');
+var bodyParser = require("body-parser");
+var expressValidator =  require("express-validator");
+var methodOverride = require('method-override');
+var session = require('express-session');
+var MongoStore = require('connect-mongo')(session);
+var flash = require('express-flash');
+var passport = require("passport");
+var mongoose = require("mongoose");
+var logger = require('morgan')
+
+mongoose.Promise = require('bluebird');
+// Connect to the beerlocker MongoDB
+mongoose.connect(process.env.MONGODB_URL);
 
 
 app.set('port', process.env.PORT || 8080);
@@ -17,6 +25,7 @@ app.set("view engine","pug");
 app.set("views","./views");
 
 app.use(express.static("public"));
+app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(expressValidator());
@@ -32,9 +41,20 @@ app.use(session({
   })
 }));
 app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(logger('dev'));
+
+require('./config/passport')(passport);
+
+app.use(function(req, res, next) {
+  res.locals.user = req.user;
+  next();
+});
 
 //router
-app.use(require('./routes/web'))
+require('./routes/web.js')(app,passport);
+
 
 app.listen(app.get('port'), app.get('domain'), () => {
     console.log('%s App is running at http://%s:%d in %s mode', 
@@ -44,9 +64,3 @@ app.listen(app.get('port'), app.get('domain'), () => {
 		    	app.get('env')); 
     console.log('   -> Press CTRL+C to stop\n');
 });
-app.get('/', (req, res) => {
-    res.send("Hello NodeJS");
-});
-app.get('/blank',(req,res) => {
-	res.render("posts/index");
-})

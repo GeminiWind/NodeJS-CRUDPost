@@ -5,9 +5,10 @@ aside
             p.centered
               a(href='profile.html')
                 img.img-circle(src='assets/img/ui-sam.jpg', width='60')
-            h5.centered Marcel Newman
+            if user
+              h5.centered #{user.local.email}
             li.mt
-              a(href='index.html')
+              a(href='/')
                 i.fa.fa-dashboard
                 span Dashboard
             li.sub-menu
