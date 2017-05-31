@@ -1,0 +1,13 @@
+extends ../layout/desktop.pug
+
+block content
+     section#main-content
+        section.wrapper.site-min-height
+          h3
+            i.fa.fa-angle-right
+            |  Profile
+          .row.mt
+            .col-md-12
+              .content-panel
+                p Profile Here
+                p Hello #{user.local.email}

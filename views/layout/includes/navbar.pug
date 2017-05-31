@@ -104,4 +104,7 @@ header.header.black-bg
         .top-menu
           ul.nav.pull-right.top-menu
             li
-              a.logout(href='login.html') Logout
+              if user
+                a.logout(href='/logout') Logout
+              else
+                a.logout(href='/login') Login
