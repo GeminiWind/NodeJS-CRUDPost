@@ -1,0 +1,28 @@
+extends ./../layout/desktop.pug
+
+block content
+     section#main-content
+        section.wrapper.site-min-height
+          h3
+            i.fa.fa-angle-right
+            |  Chat Box
+          .row.mt
+            .col-lg-12
+              .form-panel
+                h4.mb
+                  i.fa.fa-angle-right
+                  |  Chat Room
+                ul#chat_area
+                  each chat in chats
+                    li
+                      p
+                        h4 From #{chat.author[0].local.email}
+                      p #{chat.content}
+                form.form-horizontal.style-form(method="post", action="/chats")
+                  .form-group
+                    label.col-sm-2.col-sm-2.control-label Type here
+                    .col-sm-10
+                      input.form-control(type='text', name='content', id="content_chat")
+                  button.btn.btn-primary(type='submit') Send
+block additonalScript
+  script(src="/js/chat.js")

@@ -1,7 +1,9 @@
-const postController = require('../controllers/PostController');
+
 const loginController = require('../controllers/Auth/LoginController');
 const registerController = require('../controllers/Auth/RegisterController');
-module.exports = function(app, passport) {
+module.exports = function(app, passport, io) {
+    const postController = require('../controllers/PostController')(io);
+    const chatController = require('../controllers/ChatController')(io);
     app.get('/', (req, res) => {
         res.render('index');
     });
@@ -70,6 +72,9 @@ module.exports = function(app, passport) {
     app.get("/posts/:id/edit", postController.edit);
     app.put("/posts/:id", postController.update);
     app.delete("/posts/:id", postController.delete);
+    //Chat realtime
+    app.get("/chats", isLoggedIn, chatController.index);
+    app.post("/chats",isLoggedIn, chatController.store);
 }
 // route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {
@@ -78,5 +83,5 @@ function isLoggedIn(req, res, next) {
         return next();
     }
     // if they aren't redirect them to the home page
-    res.redirect('/');
+    res.redirect('/login');
 }

@@ -11,7 +11,9 @@ var MongoStore = require('connect-mongo')(session);
 var flash = require('express-flash');
 var passport = require("passport");
 var mongoose = require("mongoose");
-var logger = require('morgan')
+var logger = require('morgan');
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
 
 mongoose.Promise = require('bluebird');
 // Connect to the beerlocker MongoDB
@@ -53,10 +55,16 @@ app.use(function(req, res, next) {
 });
 
 //router
-require('./app/routes/web.js')(app,passport);
+require('./app/routes/web.js')(app,passport,io);
 
+io.on('connection', function (socket) { 
+  console.log("Listening event from chat channel");
+  socket.on("chat", function(data) {
+    console.log(data);
+  });
+});
 
-app.listen(app.get('port'), app.get('domain'), () => {
+http.listen(app.get('port'), app.get('domain'), () => {
     console.log('%s App is running at http://%s:%d in %s mode', 
 		    	chalk.green('✓'),
 		    	app.get('domain'),

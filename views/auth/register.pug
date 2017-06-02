@@ -26,17 +26,19 @@ html(lang='en')
     #login-page
       .container
         form.form-login(method='post',action='/register', enctype="application/x-www-form-urlencoded")
-          h2.form-login-heading sign in now
+          h2.form-login-heading Register
           .login-wrap
             input.form-control(type='email', placeholder='Your Email', name='email')
             br
+            - if (messages)
+              p(style={'color': 'red'}) #{message}
             input.form-control(type='password', placeholder='Password', name='password')
             label.checkbox
               span.pull-right
                 a(data-toggle='modal', href='login.html#myModal')  Forgot Password?
             button.btn.btn-theme.btn-block(type='submit')
               i.fa.fa-lock
-              |  SIGN IN
+              |  Create your account
             hr
             .login-social-link.centered
               p or you can sign in via your social network
