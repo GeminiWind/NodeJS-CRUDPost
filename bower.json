@@ -1,0 +1,21 @@
+{
+  "name": "crudpost",
+  "description": "NodeJS app for CRUD post",
+  "main": "app.js",
+  "authors": [
+    "Gemini Wind"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/GeminiWind/NodeJS-CRUDPost",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/vendor/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "sweetalert2": "^6.6.4"
+  }
+}

@@ -14,6 +14,8 @@ html(lang='en')
     // Custom styles for this template
     link(href='assets/css/style.css', rel='stylesheet')
     link(href='assets/css/style-responsive.css', rel='stylesheet')
+    link(href='/vendor/sweetalert2/dist/sweetalert2.min.css', rel='stylesheet')
+    script(src='/vendor/sweetalert2/dist/sweetalert2.min.js', type='text/javascript')
     // HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries
     //if lt IE 9
       script(src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js')
@@ -29,6 +31,8 @@ html(lang='en')
           h2.form-login-heading sign in now
           .login-wrap
             input.form-control(type='email', placeholder='Your Email', name='email')
+            - if (messages)
+              p(style={'color': 'red'}) #{message}
             br
             input.form-control(type='password', placeholder='Password', name='password')
             label.checkbox
