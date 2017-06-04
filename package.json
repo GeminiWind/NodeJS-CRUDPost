@@ -1,17 +1,17 @@
 {
-  "name": "crudpost",
+  "name": "hackathon",
   "version": "1.0.0",
-  "description": "NodeJS app for CRUD post",
+  "description": "NodeJS Hackathon",
   "repository": {
     "type": "git",
-    "url": "https://github.com/GeminiWind/NodeJS-CRUDPost.git"
+    "url": "https://github.com/GeminiWind/NodeJS-Hackathon.git"
   },
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "node app",
     "watch": "nodemon app",
-    "build": "webpack",
+    "bundle": "webpack --progress --colors",
     "build:product": "webpack -p"
   },
   "keywords": [],
