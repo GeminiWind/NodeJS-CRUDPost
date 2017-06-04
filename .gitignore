@@ -1,3 +1,6 @@
 node_modules
 .env
-public/vendor
+public/css
+public/fonts
+public/images
+public/js
