@@ -10,19 +10,9 @@ block content
             .col-md-12
               .content-panel
                 - if (messages.success)
-                  script.
-                    swal(
-                      'Success',
-                      'Your action was success',
-                      'success'
-                    )
+                  script(src="/js/components/notfication/success_noti.js")
                 - else if (messages.error)
-                  script.
-                    swal({
-                      title: 'Whoops ...',
-                      text: "Look like something went wrong",
-                      type: 'error',
-                    })
+                  script(src="/js/components/notfication/error_noti.js")
                 table.table.table-striped.table-advance.table-hover
                   h4
                     i.fa.fa-angle-right
@@ -47,45 +37,4 @@ block content
                               i.fa.fa-trash-o
                         tr
 block additonalScript
-  script.
-    $('.deletePost').each(function () {
-      var $this = $(this);
-      $this.on("click", function () {
-        swal({
-          title: 'Enter post title',
-          input: 'text',
-          showCancelButton: true,
-          confirmButtonText: 'Delete',
-          showLoaderOnConfirm: true,
-          preConfirm: function (title) {
-            return new Promise(function (resolve, reject) {
-              setTimeout(function() {
-                if (title != $this.data('post-title')) {
-                  reject('Your title is not match.')
-                } else {
-                  resolve()
-                }
-              }, 2000)
-            })
-          },
-          allowOutsideClick: false
-        }).then(function (title) {
-          $.ajax({
-            url: "/posts/" + $this.data('post-id') + "",
-            type: "DELETE",
-            success : function () {
-                $this.parent().parent().remove();
-                swal("Done!", "It was succesfully deleted!", "success");
-            },
-            error : function (){
-              swal({
-                title:"error",
-                text:"error",
-                type: "error"
-              })
-            }
-          });
-        })
-      });
-    });
-    
+  script(src="/js/post.js")
