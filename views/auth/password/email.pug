@@ -21,34 +21,22 @@ html(lang='en')
       ***********************************************************************************************************************************************************
     #login-page
       .container
-        form.form-login(method='post',action='/login', enctype="application/x-www-form-urlencoded")
-          h2.form-login-heading sign in now
+        form.form-login(method='post',action='/forget')
+          h2.form-login-heading Forget Password
+          if messages.error
+            .alert.alert-danger
+              div= messages.error
+          if messages.info
+            .alert.alert-info
+              div= messages.info
+          if messages.success
+            .alert.alert-success
+              div= messages.success
           .login-wrap
             input.form-control(type='email', placeholder='Your Email', name='email')
-            - if (messages)
-              p(style={'color': 'red'}) #{message}
-            br
-            input.form-control(type='password', placeholder='Password', name='password')
-            label.checkbox
-              span.pull-right
-                a(href='/forget')  Forgot Password?
             button.btn.btn-theme.btn-block(type='submit')
               i.fa.fa-lock
-              |  SIGN IN
-            hr
-            .login-social-link.centered
-              p or you can sign in via your social network
-              a.btn.btn-facebook(href='/facebook')
-                i.fa.fa-facebook
-                |  Facebook
-              a.btn.btn-twitter(href='/google')
-                i.fa.fa-twitter
-                |  Google
-            .registration
-              | Don&apos;t have an account yet?
-              br
-              a(href='/register')
-                | Create an account
+              |  Reset Password
     // BACKSTRETCH
     // You can use an image of whatever size. This script will stretch to fit in any screen size.
     script(type='text/javascript', src='assets/js/jquery.backstretch.min.js')

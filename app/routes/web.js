@@ -1,6 +1,8 @@
 
 const loginController = require('../controllers/Auth/LoginController');
 const registerController = require('../controllers/Auth/RegisterController');
+const forgetPasswordController = require('../controllers/Auth/ForgetPasswordController.js');
+const resetPasswordController = require('../controllers/Auth/ResetPasswordController.js');
 module.exports = function(app, passport, io) {
     const postController = require('../controllers/PostController')(io);
     const chatController = require('../controllers/ChatController')(io);
@@ -26,6 +28,10 @@ module.exports = function(app, passport, io) {
         failureRedirect: '/register', // redirect back to the signup page if there is an error
         failureFlash: true // allow flash messages
     }));
+    app.get('/forget',forgetPasswordController.showForgetForm);
+    app.post('/forget',forgetPasswordController.forget);
+    app.get('/reset/:token', resetPasswordController.showResetForm);
+    app.post('/reset/:token', resetPasswordController.reset);
     app.get('/facebook', passport.authenticate('facebook', { scope : 'email' }));
 
     // handle the callback after facebook has authenticated the user
