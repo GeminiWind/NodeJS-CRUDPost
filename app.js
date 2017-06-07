@@ -4,6 +4,7 @@ var app = express();
 var dotenv = require("dotenv").config();
 var cookieParser = require('cookie-parser');
 var bodyParser = require("body-parser");
+var lusca = require("lusca");
 var expressValidator =  require("express-validator");
 var methodOverride = require('method-override');
 var session = require('express-session');
@@ -42,6 +43,15 @@ app.use(session({
     clear_interval: 3600
   })
 }));
+app.use((req, res, next) => {
+  //if route is api
+  if (req.method === 'DELETE' && req.path.indexOf("api") !== -1) {
+    next();
+  } else {
+  //use CSRF token to protect app
+    lusca.csrf()(req, res, next);
+  }
+});
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
@@ -56,6 +66,7 @@ app.use(function(req, res, next) {
 
 //router
 require('./app/routes/web.js')(app,passport,io);
+require('./app/routes/api.js')(app,io);
 
 io.on('connection', function (socket) { 
   console.log("Listening event from chat channel");

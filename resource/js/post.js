@@ -24,7 +24,7 @@ $('.deletePost').each(function() {
             allowOutsideClick: false
         }).then(function(title) {
             $.ajax({
-                url: "/posts/" + $this.data('post-id') + "",
+                url: "/api/posts/" + $this.data('post-id') + "",
                 type: "DELETE",
                 success: function() {
                     $this.parent().parent().remove();

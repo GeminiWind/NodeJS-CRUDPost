@@ -77,7 +77,6 @@ module.exports = function(app, passport, io) {
     app.post("/posts", postController.store);
     app.get("/posts/:id/edit", postController.edit);
     app.put("/posts/:id", postController.update);
-    app.delete("/posts/:id", postController.delete);
     //Chat realtime
     app.get("/chats", isLoggedIn, chatController.index);
     app.post("/chats",isLoggedIn, chatController.store);
