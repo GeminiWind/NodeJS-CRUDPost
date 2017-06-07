@@ -1,5 +1,7 @@
-import {default as swal} from 'sweetalert2';
-
+import {
+    default as swal
+} from 'sweetalert2';
+import axios from 'axios';
 //delete process
 $('.deletePost').each(function() {
     var $this = $(this);
@@ -23,20 +25,15 @@ $('.deletePost').each(function() {
             },
             allowOutsideClick: false
         }).then(function(title) {
-            $.ajax({
-                url: "/api/posts/" + $this.data('post-id') + "",
-                type: "DELETE",
-                success: function() {
-                    $this.parent().parent().remove();
-                    swal("Done!", "It was succesfully deleted!", "success");
-                },
-                error: function() {
-                    swal({
-                        title: "error",
-                        text: "error",
-                        type: "error"
-                    })
-                }
+            axios.delete("/api/posts/" + $this.data('post-id')).then(function(response) {
+                $this.parent().parent().remove();
+                swal("Done!", "It was succesfully deleted!", "success");
+            }).catch(function(error) {
+                swal({
+                    title: "Error",
+                    text: "Whoops!!!Something went wrong",
+                    type: "error"
+                });
             });
         })
     });
