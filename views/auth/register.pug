@@ -23,6 +23,7 @@ html(lang='en')
         form.form-login(method='post',action='/register', enctype="application/x-www-form-urlencoded")
           h2.form-login-heading Register
           .login-wrap
+            input(type='hidden', name='_csrf', value=_csrf)
             input.form-control(type='email', placeholder='Your Email', name='email')
             br
             - if (messages)
