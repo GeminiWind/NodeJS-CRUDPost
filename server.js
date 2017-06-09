@@ -83,3 +83,5 @@ http.listen(app.get('port'), app.get('domain'), () => {
 		    	app.get('env')); 
     console.log('   -> Press CTRL+C to stop\n');
 });
+
+module.exports = app;
