@@ -4,9 +4,15 @@ aside
           ul#nav-accordion.sidebar-menu
             p.centered
               a(href='profile.html')
-                img.img-circle(src='assets/img/ui-sam.jpg', width='60')
+                if (user)
+                  if (user.profile.picture)
+                    img.img-circle(src=user.profile.picture,width='60')
+                  else
+                    img.img-circle(src='assets/img/ui-sam.jpg', width='60')
+                else 
+                  img.img-circle(src='assets/img/ui-sam.jpg', width='60')
             if user
-              h5.centered #{user.local.email}
+              h5.centered #{user.profile.name}
             li.mt
               a(href='/')
                 i.fa.fa-dashboard

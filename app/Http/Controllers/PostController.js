@@ -1,4 +1,4 @@
-const Post = require('../models/Post');
+const Post = require('../../Models/Post');
 var mongoose = require("mongoose");
 module.exports = function(io) {
     var module = {};

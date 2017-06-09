@@ -25,7 +25,7 @@ app.set('port', process.env.PORT || 8080);
 app.set('domain', process.env.DOMAIN || 'localhost');
 app.set('env', process.env.NODE_ENV || "development");
 app.set("view engine","pug");
-app.set("views","./views");
+app.set("views","./resource/views");
 
 app.use(express.static("public"));
 app.use(cookieParser());
@@ -65,8 +65,8 @@ app.use(function(req, res, next) {
 });
 
 //router
-require('./app/routes/web.js')(app,passport,io);
-require('./app/routes/api.js')(app,io);
+require('./routes/web.js')(app,passport,io);
+require('./routes/api.js')(app,io);
 
 io.on('connection', function (socket) { 
   console.log("Listening event from chat channel");
