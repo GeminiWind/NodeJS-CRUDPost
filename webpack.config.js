@@ -7,11 +7,11 @@ module.exports = {
     context: __dirname,
     devtool: debug ? "inline-sourcemap" : null,
     entry: {
-        'js/app': './resource/js/app.js',
-        'js/chat': './resource/js/chat.js',
-        'js/post': './resource/js/post.js',
-        'js/components/notfication/success_noti': './resource/js/components/notfication/success.js',
-        'js/components/notfication/error_noti': './resource/js/components/notfication/error.js'
+        'js/app': './resource/assets/js/app.js',
+        'js/chat': './resource/assets/js/chat.js',
+        'js/post': './resource/assets/js/post.js',
+        'js/components/notfication/success_noti': './resource/assets/js/components/notfication/success.js',
+        'js/components/notfication/error_noti': './resource/assets/js/components/notfication/error.js'
     },
     output: {
         path: path.resolve(__dirname, 'public'),
