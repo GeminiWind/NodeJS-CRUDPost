@@ -1,4 +1,5 @@
-# NodeJS Hackathon
+# NodeJS Hackathon - NodeJS App By Express,MongoDB and Socket.io
+![NodeJS + Express + MongoDB](https://www.businesscard.vn/blog/wp-content/uploads/2016/01/huong-dan-ket-noi-mongodb.jpg)
 ------
 
 
@@ -14,12 +15,12 @@ ___
 * CRUD Post
 * Realtime application by socket.io
 
-##Prerequisites
+## Prerequisites
 ___
 * MongoDB
 * NodeJS 7.0+
 
-##Getting Started
+## Getting Started
 The easiest way to get started is to clone the repository:
 ```
 # Get the latest source code
