@@ -1,4 +1,4 @@
-const Chat = require('../models/Chat');
+const Chat = require('../../Models/Chat');
 var mongoose = require("mongoose");
 module.exports = function(io) {
     var module = {};

@@ -7,7 +7,6 @@ html(lang='en')
     meta(name='author', content='Dashboard')
     meta(name='keyword', content='Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina')
     title NodeJS Starter
-    // Bootstrap core CSS
     link(href='/css/app.css', rel='stylesheet')
     script(src='/js/app.js')
     // HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries
@@ -21,24 +20,32 @@ html(lang='en')
       ***********************************************************************************************************************************************************
     #login-page
       .container
-        form.form-login(method='post',action='/reset/' + token)
-          h2.form-login-heading Update Password
-          if messages.error
-            .alert.alert-danger
-              div= messages.error
-          if messages.info
-            .alert.alert-info
-              div= messages.info
-          if messages.success
-            .alert.alert-success
-              div= messages.success
+        form.form-login(method='post',action='/register', enctype="application/x-www-form-urlencoded")
+          h2.form-login-heading Register
           .login-wrap
-            input.form-control(type='password', name='password', value='', placeholder='New password', autofocus=true)
+            input(type='hidden', name='_csrf', value=_csrf)
+            input.form-control(type='text', placeholder='Your Name', name='name')
             br
-            input.form-control(type='password', name='confirm', value='', placeholder='Confirm password')
+            input.form-control(type='email', placeholder='Your Email', name='email')
+            br
+            - if (messages)
+              p(style={'color': 'red'}) #{message}
+            input.form-control(type='password', placeholder='Password', name='password')
+            label.checkbox
+              span.pull-right
+                a(href='/forget')  Forgot Password?
             button.btn.btn-theme.btn-block(type='submit')
               i.fa.fa-lock
-              |  Update Password
+              |  Create your account
+            hr
+            .login-social-link.centered
+              p or you can sign in via your social network
+              a.btn.btn-facebook(href='/facebook')
+                i.fa.fa-facebook
+                |  Facebook
+              a.btn.btn-twitter(href='/google')
+                i.fa.fa-twitter
+                |  Google
     // BACKSTRETCH
     // You can use an image of whatever size. This script will stretch to fit in any screen size.
     script(type='text/javascript', src='assets/js/jquery.backstretch.min.js')

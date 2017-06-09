@@ -1,7 +1,7 @@
 var async = require('async');
 var nodemailer = require('nodemailer');
 // load up the user model
-var User = require('../../models/User');
+var User = require('../../../Models/User');
 //load env config
 require("dotenv").config();
 exports.showResetForm = function(req, res) {
@@ -34,7 +34,7 @@ exports.reset = function(req, res) {
                     req.flash('error', 'Password reset token is invalid or has expired.');
                     return res.redirect('back');
                 }
-                user.local.password = req.body.password;
+                user.password = req.body.password;
                 user.resetPasswordToken = undefined;
                 user.resetPasswordExpires = undefined;
                 user.save(function(err) {
@@ -51,10 +51,10 @@ exports.reset = function(req, res) {
                 }
             });
             var mailOptions = {
-                to: user.local.email,
+                to: user.email,
                 from: 'passwordreset@demo.com',
                 subject: 'Your password has been changed',
-                text: 'Hello,\n\n' + 'This is a confirmation that the password for your account ' + user.local.email + ' has just been changed.\n'
+                text: 'Hello,\n\n' + 'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
             };
             smtpTransport.sendMail(mailOptions, function(err) {
                 req.flash('success', 'Success! Your password has been changed.');

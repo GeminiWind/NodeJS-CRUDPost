@@ -1,11 +1,10 @@
-
-const loginController = require('../controllers/Auth/LoginController');
-const registerController = require('../controllers/Auth/RegisterController');
-const forgetPasswordController = require('../controllers/Auth/ForgetPasswordController.js');
-const resetPasswordController = require('../controllers/Auth/ResetPasswordController.js');
+const loginController = require('../app/Http/Controllers/Auth/LoginController');
+const registerController = require('../app/Http/Controllers/Auth/RegisterController');
+const forgetPasswordController = require('../app/Http/Controllers/Auth/ForgetPasswordController.js');
+const resetPasswordController = require('../app/Http/Controllers/Auth/ResetPasswordController.js');
 module.exports = function(app, passport, io) {
-    const postController = require('../controllers/PostController')(io);
-    const chatController = require('../controllers/ChatController')(io);
+    const postController = require('../app/Http/Controllers/PostController')(io);
+    const chatController = require('../app/Http/Controllers/ChatController')(io);
     app.get('/', (req, res) => {
         res.render('index');
     });
