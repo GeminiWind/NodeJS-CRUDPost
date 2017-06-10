@@ -3,6 +3,4 @@ node_modules
 public/css
 public/fonts
 public/images
-public/js/*
-!public/js/common-scripts.js
-!public/js/jquery.dcjqaccordion.2.7.js
+public/js
