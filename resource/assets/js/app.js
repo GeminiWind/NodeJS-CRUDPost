@@ -6,4 +6,8 @@ import 'sweetalert2/src/sweetalert2.scss';
 //js
 global.jQuery = require('jquery');
 global.$ = require('jquery');
-require("bootstrap");
+require('bootstrap');
+require('jquery-ui');
+require('jquery.scrollto');
+require('jquery.nicescroll');
+require('jquery-ui-touch-punch');
