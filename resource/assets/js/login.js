@@ -1,2 +1,2 @@
 require('jquery.backstretch');
-$.backstretch("assets/img/login-bg.jpg", {speed: 500});
+$.backstretch("/images/login-bg.jpg", {speed: 500});
