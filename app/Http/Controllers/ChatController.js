@@ -20,18 +20,21 @@ module.exports = function(io) {
                 res.status(400).send('There have been validation errors: ');
                 return;
             }
-            let chat = new Chat({content: req.body.content, author : [req.user]});
+            let chat = new Chat({
+                content: req.body.content,
+                author: [req.user]
+            });
             chat.save(function(err, createdChat) {
                 if (err) {
-                    req.flash('error', 'Whoops! Sonething went wrong');
+                    req.status(500);
                 }
-                io.on('connection', function(socket){
-				  socket.broadcast.emit('chat',{content:chat.content,author:chat.author[0].local.email});
-                  console.log("Send chat event ok");
-				  socket.on('disconnect', () => {
-				    console.log('user disconnected');
-				  });
-				});
+                io.on('connection', function(socket) {
+                    socket.broadcast.emit('chat', {
+                        content: chat.content,
+                        author: chat.author[0].email
+                    });
+                    console.log("Send chat event ok");
+                });
                 res.redirect("/chats");
             });
         });

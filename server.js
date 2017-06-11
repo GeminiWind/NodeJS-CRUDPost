@@ -69,9 +69,8 @@ require('./routes/web.js')(app,passport,io);
 require('./routes/api.js')(app,io);
 
 io.on('connection', function (socket) { 
-  console.log("Listening event from chat channel");
   socket.on("chat", function(data) {
-    console.log(data);
+    console.log(data.content + data.author);
   });
 });
 
