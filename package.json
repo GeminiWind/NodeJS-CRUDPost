@@ -57,6 +57,7 @@
     "pug": "^2.0.0-rc.1",
     "request": "^2.78.0",
     "socket.io": "^2.0.2",
+    "socket.io-client": "^2.0.2",
     "sweetalert2": "^6.6.4"
   },
   "devDependencies": {

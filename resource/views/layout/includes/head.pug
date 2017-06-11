@@ -4,11 +4,15 @@ head
     meta(name='description', content='')
     meta(name='author', content='Dashboard')
     meta(name='keyword', content='Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina')
+    meta(name='_csrf', content=_csrf)
     title Node JS Starter
     // Bootstrap core CSS
     link(href='/css/app.css', rel='stylesheet')
     script(src='/js/app.js')
-    script(src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.2/socket.io.js")
+    block js_head
+    block script_head
+    block css
+    block style
     // HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries
     //if lt IE 9
       script(src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js')

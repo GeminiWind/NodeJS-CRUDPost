@@ -1,5 +1,6 @@
 extends ./../layout/desktop.pug
-
+block js_head
+  script(src="/js/chat.js")
 block content
      section#main-content
         section.wrapper.site-min-height
@@ -16,14 +17,12 @@ block content
                   each chat in chats
                     li
                       p
-                        h4 From #{chat.author[0].local.email}
+                        h4 From #{chat.author[0].email}
                       p #{chat.content}
-                form.form-horizontal.style-form(method="post", action="/chats")
+                form.form-horizontal.style-form(action='/chats','method'='post')
                   .form-group
                     label.col-sm-2.col-sm-2.control-label Type here
                     .col-sm-10
                       input(type='hidden', name='_csrf', value=_csrf)
                       input.form-control(type='text', name='content', id="content_chat")
                   button.btn.btn-primary(type='submit') Send
-block additonalScript
-  script(src="/js/chat.js")

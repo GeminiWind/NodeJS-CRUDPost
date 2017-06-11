@@ -9,6 +9,7 @@ module.exports = {
     entry: {
         'js/app': './resource/assets/js/app.js',
         'js/chat': './resource/assets/js/chat.js',
+        'js/sendMsg' : './resource/assets/js/sendMsg.js',
         'js/post': './resource/assets/js/post.js',
         'js/login': './resource/assets/js/login.js',
         'js/components/notfication/success_noti': './resource/assets/js/components/notfication/success.js',
