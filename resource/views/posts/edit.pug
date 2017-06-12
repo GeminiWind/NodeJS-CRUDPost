@@ -1,5 +1,8 @@
 extends ./../layout/desktop.pug
 
+block script_head
+  script(src="https://cloud.tinymce.com/stable/tinymce.min.js")
+
 block content
      section#main-content
         section.wrapper.site-min-height
@@ -22,5 +25,12 @@ block content
                   .form-group
                     label.col-sm-2.col-sm-2.control-label Content
                     .col-sm-10
-                      textarea.form-control(name='content', rows="10",cols="10") #{post.content}
+                      textarea.form-control(name='content', rows="10",cols="10",id="content") #{post.content}
                   button.btn.btn-primary(type='submit') Submit
+
+block script
+  script.
+    tinymce.init({
+      selector: '#content',
+      themes:"modern",
+    });
