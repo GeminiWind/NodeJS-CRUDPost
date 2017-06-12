@@ -9,5 +9,33 @@ block content
           .row.mt
             .col-md-12
               .content-panel
-                p Profile Here
-                p Hello #{user.email}
+                if (user.profile.picture)
+                  img.img-circle(src=user.profile.picture,width='80')
+                else
+                  img.img-circle(src='/images/ui-sam.jpg', width='80')
+                br
+                a(data-toggle='modal', href='#changePic')
+                  button.btn.btn-primary Change picutre
+                // Modal
+                #changePic.modal.fade(aria-hidden='true', aria-labelledby='myModalLabel', role='dialog', tabindex='-1')
+                  .modal-dialog
+                    .modal-content
+                      .modal-header
+                        button.close(type='button', data-dismiss='modal', aria-hidden='true') &times;
+                        h4.modal-title Change Picture
+                      .modal-body
+                        form(method='post',action='/profile/pic', enctype="multipart/form-data")
+                          input(type='hidden', name='_csrf', value=_csrf)
+                          p Choose your picture.
+                          input.form-control(type='file', name='avatar',onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])")
+                          p Preview Image
+                          <img id="blah" alt="your image" width="100" height="100" />
+                          br
+                          br
+                          button.btn.btn-theme(type='submit') Submit
+                      .modal-footer
+                        button.btn.btn-default(data-dismiss='modal', type='button') Cancel
+                          
+                // modal
+                p Name: #{user.profile.name}
+                p Email: #{user.email}

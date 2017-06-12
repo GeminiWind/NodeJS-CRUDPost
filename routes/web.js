@@ -64,6 +64,15 @@ module.exports = function(app, passport, io) {
             user: req.user // get the user out of session and pass to template
         });
     });
+    app.post('/profile/pic', [middleware.redirectIfAuthenticated,middleware.uploadProfilePicture], function (req, res, next) {
+      console.log(req.file.path);
+      let user = req.user;
+      user.profile.picture = req.file.path;
+      user.save(function(err,user){
+        if (err) console.log(err);
+      })
+      res.redirect('back');
+    })
     // =====================================
     // LOGOUT ==============================
     // =====================================

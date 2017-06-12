@@ -44,8 +44,8 @@ app.use(session({
   })
 }));
 app.use((req, res, next) => {
-  //if route is api
-  if (req.method === 'DELETE' && req.path.indexOf("api") !== -1) {
+  //if route is api || csrf not work with enctype =>ignore
+  if (req.path.indexOf("api") !== -1 || req.path === '/profile/pic') {
     next();
   } else {
   //use CSRF token to protect app
