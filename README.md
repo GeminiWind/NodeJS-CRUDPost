@@ -1,10 +1,10 @@
 # NodeJS Hackathon - NodeJS App By Express,MongoDB and Socket.io
 ![NodeJS + Express + MongoDB](https://www.businesscard.vn/blog/wp-content/uploads/2016/01/huong-dan-ket-noi-mongodb.jpg)
-------
+___
 
 
 ## Features
-___
+------
 * Local Authentication
 * OAuth 2.0 Authentication via Facebook, Google
 * Flash notifications
@@ -16,7 +16,7 @@ ___
 * Realtime application by socket.io
 
 ## Prerequisites
-___
+------
 * MongoDB
 * NodeJS 7.0+
 
