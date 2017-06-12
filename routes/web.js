@@ -72,7 +72,7 @@ module.exports = function(app, passport, io) {
         if (err) console.log(err);
       })
       res.redirect('back');
-    })
+    });
     // =====================================
     // LOGOUT ==============================
     // =====================================
