@@ -1,15 +1,16 @@
 var multer  = require('multer');
 //config multer
+var configFile = require('../../../config/file.js');
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'storage/app/profile/')
+    cb(null, configFile.upload.profile_pic)
   },
   filename: function (req, file, cb) {
   	let extArray = file.mimetype.split("/");
     let extension = extArray[extArray.length - 1];
     cb(null, req.user.profile.name + '.' + extension);
   }
-})
+});
 
 var uploadProfilePic = multer({ storage: storage });
 

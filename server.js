@@ -76,10 +76,10 @@ io.on('connection', function (socket) {
 
 http.listen(app.get('port'), app.get('domain'), () => {
     console.log('%s App is running at http://%s:%d in %s mode', 
-		    	chalk.green('✓'),
-		    	app.get('domain'),
-		    	app.get('port'),
-		    	app.get('env')); 
+          chalk.green('✓'),
+          app.get('domain'),
+          app.get('port'),
+          app.get('env')); 
     console.log('   -> Press CTRL+C to stop\n');
 });
 
