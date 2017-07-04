@@ -13,5 +13,6 @@ var chatSchema = new Schema({
         updatedAt: 'updated_at'
     }
 });
+// create the model for users and expose it to our app
 var Chat = mongoose.model('Chat', chatSchema);
 module.exports = Chat;

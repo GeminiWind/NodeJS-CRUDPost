@@ -4,6 +4,8 @@ var nodemailer = require('nodemailer');
 var User = require('../../../Models/User');
 //load env config
 require("dotenv").config();
+
+//show the reset password form
 exports.showResetForm = function(req, res) {
     User.findOne({
         resetPasswordToken: req.params.token,
@@ -21,6 +23,8 @@ exports.showResetForm = function(req, res) {
         });
     });
 };
+
+//reset password
 exports.reset = function(req, res) {
     async.waterfall([
         function(done) {

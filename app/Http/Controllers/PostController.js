@@ -1,7 +1,9 @@
+//load model
 const Post = require('../../Models/Post');
 var mongoose = require("mongoose");
 module.exports = function(io) {
     var module = {};
+    //show all post
     module.index = (req, res) => {
         Post.find(function(err, posts) {
             if (err) {
@@ -13,9 +15,13 @@ module.exports = function(io) {
             }
         });
     };
+
+    //show view to create new post
     module.create = (req, res) => {
         return res.render("posts/create");
     };
+
+    //store new post
     module.store = (req, res) => {
         req.assert('title', 'Null title').notEmpty();
         req.assert('content', 'Null content').notEmpty();
@@ -41,6 +47,8 @@ module.exports = function(io) {
             });
         });
     };
+
+    //show view to edit specified post
     module.edit = (req, res) => {
         Post.findById(req.params.id, (err, post) => {
             if (err) {
@@ -55,6 +63,8 @@ module.exports = function(io) {
             }
         });
     };
+
+    //update specified post
     module.update = (req, res) => {
         let _id = new mongoose.Schema.ObjectId(req.params.id).path;
         Post.findByIdAndUpdate(_id, req.body, (err, post) => {
@@ -65,6 +75,7 @@ module.exports = function(io) {
             res.redirect("/posts");
         });
     }
+    //delete specified post
     module.delete = (req, res) => {
         let _id = new mongoose.Schema.ObjectId(req.params.id).path;
         Post.findByIdAndRemove(_id, (err, post) => {
