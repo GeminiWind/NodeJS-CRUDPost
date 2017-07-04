@@ -5,11 +5,15 @@ var nodemailer = require('nodemailer');
 var User = require('../../../Models/User');
 //load env config
 require("dotenv").config();
+
+//show forget form 
 exports.showForgetForm = function(req, res) {
     res.render('auth/password/email', {
         user: req.user
     });
 };
+
+//process forget
 exports.forget = (req, res, next) => {
     async.waterfall([
         function(done) {

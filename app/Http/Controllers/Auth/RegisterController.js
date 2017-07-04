@@ -1,8 +1,10 @@
+//show the registation form
 exports.showRegistrationForm = (req, res) => {
     res.render('auth/register', {
         message: req.flash('signupMessage')
     });
 }
+//process register
 exports.register = (passport) => {
     passport.authenticate('local-signup', {
         successRedirect: '/profile', // redirect to the secure profile section

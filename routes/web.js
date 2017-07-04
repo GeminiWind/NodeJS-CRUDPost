@@ -1,3 +1,9 @@
+
+//========================================
+//This file contain all webroutes of our application
+//========================================
+
+//load controller and middleware
 const loginController = require('../app/Http/Controllers/Auth/LoginController');
 const registerController = require('../app/Http/Controllers/Auth/RegisterController');
 const forgetPasswordController = require('../app/Http/Controllers/Auth/ForgetPasswordController.js');
@@ -28,12 +34,21 @@ module.exports = function(app, passport, io) {
         failureRedirect: '/register', // redirect back to the signup page if there is an error
         failureFlash: true // allow flash messages
     }));
+    //show the forget form
     app.get('/forget',forgetPasswordController.showForgetForm);
+    //process the forget
     app.post('/forget',forgetPasswordController.forget);
+    //show the reset password form
     app.get('/reset/:token', resetPasswordController.showResetForm);
+    //process reset password
     app.post('/reset/:token', resetPasswordController.reset);
+     // =====================================
+    // Facebook ROUTES =======================
+    // =====================================
+    // send to google to do the authentication
+    // profile gets us their basic information including their name
+    // email gets their emails
     app.get('/facebook', passport.authenticate('facebook', { scope : 'email' }));
-
     // handle the callback after facebook has authenticated the user
     app.get('/facebook/callback',
         passport.authenticate('facebook', {
@@ -58,7 +73,7 @@ module.exports = function(app, passport, io) {
     // PROFILE SECTION =====================
     // =====================================
     // we will want this protected so you have to be logged in to visit
-    // we will use route middleware to verify this (the isLoggedIn function)
+    // we will use route middleware to verify this (the redirectIfAuthenticated)
     app.get('/profile', middleware.redirectIfAuthenticated, function(req, res) {
         res.render('auth/profile', {
             user: req.user // get the user out of session and pass to template

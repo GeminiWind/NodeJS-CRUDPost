@@ -14,6 +14,7 @@ var storage = multer.diskStorage({
 
 var uploadProfilePic = multer({ storage: storage });
 
+//middleware to authenticate user
 exports.redirectIfAuthenticated = (req, res, next) => {
     // if user is authenticated in the session, carry on 
     if (req.isAuthenticated()) {
@@ -23,4 +24,5 @@ exports.redirectIfAuthenticated = (req, res, next) => {
     res.redirect('/login');
 }
 
+//middleware to handle avatar image of user
 exports.uploadProfilePicture = uploadProfilePic.single('avatar');

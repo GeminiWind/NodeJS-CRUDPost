@@ -1,3 +1,7 @@
+//====================================================
+//This file contain passport configuration used to authenticate user
+//====================================================
+
 // load all the things we need
 var LocalStrategy = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
@@ -108,6 +112,9 @@ module.exports = function(passport) {
             }
         });
     }));
+     /**
+     * Sign in with Facebook.
+     */
     passport.use(new FacebookStrategy({
             // pull in our app id and secret from our auth.js file
             clientID: process.env.FACEBOOK_CLIENT_ID || configAuth.facebook.clientID,
@@ -190,9 +197,9 @@ module.exports = function(passport) {
                 }
             });
         }));
-/**
- * Sign in with Google.
- */
+    /**
+     * Sign in with Google.
+     */
     passport.use(new GoogleStrategy({
         clientID: process.env.GOOGLE_CLIENT_ID || configAuth.google.clientID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET || configAuth.google.clientSecret,

@@ -1,6 +1,8 @@
+//show login form
 exports.showLoginForm = (req,res) => {
 	 res.render('auth/login', { message: req.flash('loginMessage') }); 
 }
+//login
 exports.login = (passport) => {
 	passport.authenticate('local-login', {
         successRedirect : '/profile', // redirect to the secure profile section

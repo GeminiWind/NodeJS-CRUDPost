@@ -1,7 +1,10 @@
+//load model
 const Chat = require('../../Models/Chat');
 var mongoose = require("mongoose");
 module.exports = function(io) {
     var module = {};
+
+    //show all messages
     module.index = (req, res) => {
         Chat.find(function(err, chats) {
             if (err) {
@@ -13,6 +16,8 @@ module.exports = function(io) {
             }
         });
     };
+
+    //store new message
     module.store = (req, res) => {
         req.assert('content', 'Null content').notEmpty();
         req.getValidationResult().then(function(result) {
